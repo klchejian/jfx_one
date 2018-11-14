@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="jfx_one:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/jfx_one_jar</output-path>
-    <root id="archive" name="jfx_one.jar">
-      <element id="module-output" name="qr_gen" />
-      <element id="extracted-dir" path="D:/core-3.0.0.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
