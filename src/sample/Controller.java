@@ -24,9 +24,6 @@ public class Controller {
     private TextField savePath;
 
     @FXML
-    private TextField change_line;
-
-    @FXML
     private Text tips;
 
     @FXML
@@ -41,37 +38,12 @@ public class Controller {
             tips.setText("请先输入字符");
             return;
         } else{
-//            tips.setText("");
         }
 
-
-        OutputStream outputStream = new OutputStream() {
-            @Override
-            public void write(int b) throws IOException {
-
-            }
-        };
-
-//        System.out.println("chejian hello"+text);
         try{
-            StringBuffer parms = new StringBuffer();
-//            if(change_line.getLength()<=0){
-//                parms.append(text);
-//            }else {
-//                String[] splits = text.split(change_line.getText());
-////                   String[] splits = str.split("CHANGE_LINE");
-//                for (int i = 0; i < splits.length; i++) {
-//                    if (i != 0) {
-//                        parms.append("\n");
-//                    }
-//                    parms.append(splits[i]);
-//                }
-//            }
-            parms = changeLineForString(parms,text);
-            QRCodeUtil.encode(parms.toString(),savePath.getText());
-//            QRCodeUtil.encode(parms.toString(),"C://Users/che/Desktop/ngcc.jpg",savePath.getText());
+            QRCodeUtil.encode(text,savePath.getText());
         }catch (Exception e){
-
+            pathtips.setText("系统错误!");
         }
     }
 
@@ -86,7 +58,6 @@ public class Controller {
            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
            String str = null;
            while((str = bufferedReader.readLine()) != null){
-               StringBuffer parms = new StringBuffer();
                String fileName = "";
                if(str.contains("SERIAL_SEGMENTATION")) {
                    String[] fileNameSplit = str.split("SERIAL_SEGMENTATION");
@@ -94,25 +65,9 @@ public class Controller {
                    str = fileNameSplit[1];
                }else{
                }
-//               if(change_line.getLength()<=0){
-//                    parms.append(str);
-//               }else {
-//                   String[] splits = str.split(change_line.getText());
-//                   for (int i = 0; i < splits.length; i++) {
-//                       if (i != 0) {
-//                           parms.append("\n");
-//                       }
-//                       parms.append(splits[i]);
-//                   }
-//               }
 
-               parms = changeLineForString(parms,str);
-
-               System.out.println(parms.toString());
-//               QRCodeUtil.encode(parms.toString(),"C://Users/che/Desktop/ngcc.jpg","C://Users/che/Desktop/");
-//               QRCodeUtil.encode(parms.toString(),"C://Users/che/Desktop/ngcc.jpg",savePath.getText());
-//               QRCodeUtil.encode(parms.toString(),savePath.getText());
-               QRCodeUtil.encode(parms.toString(),null,savePath.getText(),false,fileName.length()>0,fileName);
+               System.out.println(str);
+               QRCodeUtil.encode(str,null,savePath.getText(),false,fileName.length()>0,fileName);
            }
             bufferedReader.close();
             inputStream.close();
@@ -150,22 +105,6 @@ public class Controller {
             pathtips.setText("");
         }
         return true;
-    }
-
-    private StringBuffer changeLineForString(StringBuffer stb,String str){
-        if(change_line.getLength()<=0){
-            stb.append(str);
-        }else {
-            String[] splits = str.split(change_line.getText());
-//                   String[] splits = str.split("CHANGE_LINE");
-            for (int i = 0; i < splits.length; i++) {
-                if (i != 0) {
-                    stb.append("\n");
-                }
-                stb.append(splits[i]);
-            }
-        }
-        return stb;
     }
 
 }

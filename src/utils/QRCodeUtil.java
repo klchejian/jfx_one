@@ -194,14 +194,13 @@ public class QRCodeUtil {
         return QRCodeUtil.decode(new File(path));
     }
 
-    public static void batchEncode(String filePath,String desPath,String change_line){
+    public static void batchEncode(String filePath,String desPath){
         File textFile = new File(filePath);
         try{
             FileInputStream inputStream = new FileInputStream(textFile);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String str = null;
             while((str = bufferedReader.readLine()) != null){
-                StringBuffer parms = new StringBuffer();
                 String fileName = "";
                 if(str.contains("SERIAL_SEGMENTATION")) {
                     String[] fileNameSplit = str.split("SERIAL_SEGMENTATION");
@@ -209,21 +208,7 @@ public class QRCodeUtil {
                     str = fileNameSplit[1];
                 }else{
                 }
-                if(change_line.length()<=0){
-                    parms.append(str);
-                }else {
-                    String[] splits = str.split(change_line);
-//                   String[] splits = str.split("CHANGE_LINE");
-                    for (int i = 0; i < splits.length; i++) {
-                        if (i != 0) {
-                            parms.append("\n");
-                        }
-                        parms.append(splits[i]);
-                    }
-                }
-
-                System.out.println(parms.toString());
-                QRCodeUtil.encode(parms.toString(),null,desPath,false,fileName.length()>0,fileName);
+                QRCodeUtil.encode(str,null,desPath,false,fileName.length()>0,fileName);
             }
             bufferedReader.close();
             inputStream.close();

@@ -35,10 +35,6 @@
 
     <Text text=" " GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 
-    <Label text="换行符:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-
-    <TextField fx:id="change_line" GridPane.columnIndex="1" GridPane.rowIndex="6" promptText="输入换行符" />
-
     <Text fx:id="pathtips" text="  " GridPane.columnIndex="1" GridPane.rowIndex="7"/>
 
     <Button GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.halignment="RIGHT" fx:id="genButton" onMouseClicked="#setGenButtonOnClicked">生成二维码</Button>
